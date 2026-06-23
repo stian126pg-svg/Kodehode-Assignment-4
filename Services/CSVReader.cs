@@ -1,7 +1,7 @@
 // CSV Reader Service
 
 // This one has -one- responsibility, and it's to read the CSV file and return a list of Digimon objects.
-
+using System.Linq;
 using DigimonDatabase.Models;
 
 namespace DigimonDatabase.Services

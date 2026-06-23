@@ -1,3 +1,4 @@
+using System.Linq;
 using DigimonDatabase.Models;
 
 namespace DigimonDatabase.Controllers

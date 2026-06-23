@@ -3,8 +3,9 @@ using DigimonDatabase.Services;
 
 var reader = new CsvReader();
 
-var digimons = reader.ReadDigimon(
-    @"Data\DigiDB_digimonlist.csv");
+Console.WriteLine(Environment.CurrentDirectory);
+
+var digimons = reader.ReadDigimon(@"Data\DigiDB_digimonlist.csv");
 
 var controller = new DigimonController(digimons);
 
