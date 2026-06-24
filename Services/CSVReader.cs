@@ -2,15 +2,17 @@
 
 // This one has -one- responsibility, and it's to read the CSV file and return a list of Digimon objects.
 using System.Linq;
-using DigimonDatabase.Models;
+using Kodehode_Assignment_4.Models;
 
-namespace DigimonDatabase.Services
+namespace Kodehode_Assignment_4.Services
 {
     public class CsvReader
     {
         public List<Digimon> ReadDigimon(string path)
         {
             var digimons = new List<Digimon>();
+
+            Console.WriteLine(Path.GetFullPath(path));
 
             var lines = File.ReadAllLines(path);
 

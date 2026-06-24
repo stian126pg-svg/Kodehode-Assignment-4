@@ -1,7 +1,7 @@
 using System.Linq;
-using DigimonDatabase.Models;
+using Kodehode_Assignment_4.Models;
 
-namespace DigimonDatabase.Controllers
+namespace Kodehode_Assignment_4.Controllers
 {
     public class DigimonController
     {
