@@ -1,3 +1,5 @@
+// Controller functions
+
 using System.Linq;
 using Kodehode_Assignment_4.Models;
 
@@ -24,12 +26,26 @@ namespace Kodehode_Assignment_4.Controllers
 
         public IEnumerable<Digimon> GetByAttribute(string attribute)
         {
-            return _digimons.Where(d => d.Attribute == attribute);
+            return _digimons.Where(d =>
+                d.Attribute.Equals(attribute, StringComparison.OrdinalIgnoreCase));
         }
 
         public IEnumerable<Digimon> GetMemoryAbove(int value)
         {
             return _digimons.Where(d => d.Memory > value);
+        }
+
+        public Digimon? FindByName(string name)
+        {
+            return _digimons.FirstOrDefault(d =>
+                d.Name.Contains(name, StringComparison.OrdinalIgnoreCase));
+        }
+
+        public IEnumerable<Digimon> GetTopMemory(int amount)
+        {
+            return _digimons
+                .OrderByDescending(d => d.Memory)
+                .Take(amount);
         }
     }
 }
