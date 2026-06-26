@@ -1,4 +1,4 @@
-// Overall set-up tab. I am still looking into making this potentially be a bit less... "String-y"
+// Overall set-up tab.
 
 namespace Kodehode_Assignment_4.Models
 {
