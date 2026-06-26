@@ -1,4 +1,6 @@
-﻿using Kodehode_Assignment_4.Controllers;
+﻿// Main Program. Also container for Menu/UI!
+
+using Kodehode_Assignment_4.Controllers;
 using Kodehode_Assignment_4.Services;
 
 var reader = new CsvReader();
@@ -19,7 +21,7 @@ while (running)
     Console.WriteLine("3. Filter by Attribute");
     Console.WriteLine("4. Top 10 Memory");
     Console.WriteLine("5. Exit");
-
+    
     Console.Write("\nChoose an option: ");
 
     string? choice = Console.ReadLine();
