@@ -18,10 +18,11 @@ while (running)
     Console.WriteLine("==== DIGIMON DATABASE ====");
     Console.WriteLine("1. Show all Rookies");
     Console.WriteLine("2. Search by Name");
-    Console.WriteLine("3. Filter by Attribute");
-    Console.WriteLine("4. Top 10 Memory");
-    Console.WriteLine("5. Show Statistics");
-    Console.WriteLine("6. Exit");
+    Console.WriteLine("3. Advanced Search");
+    Console.WriteLine("4. Filter by Attribute");
+    Console.WriteLine("5. Top 10 Memory");
+    Console.WriteLine("6. Show Statistics");
+    Console.WriteLine("7. Exit");
     
     Console.Write("\nChoose an option: ");
 
@@ -66,11 +67,59 @@ while (running)
 
         case "3":
 
-            Console.Write("Enter Attribute (Data, Vaccine, Virus, Free): ");
+            Console.WriteLine("=== ADVANCED SEARCH ===");
 
+            Console.Write("Stage (leave blank to ignore): ");
+            string? stage = Console.ReadLine();
+
+            Console.Write("Attribute (leave blank to ignore): ");
             string? attribute = Console.ReadLine();
 
-            var attributeList = controller.GetByAttribute(attribute ?? "");
+            Console.Write("Minimum Memory (leave blank to ignore): ");
+
+            string? memoryInput = Console.ReadLine();
+
+            int? minimumMemory = null;
+
+            if (int.TryParse(memoryInput, out int memory))
+            {
+                minimumMemory = memory;
+            }
+
+            var results = controller.AdvancedSearch(
+                stage,
+                attribute,
+                minimumMemory);
+
+            Console.WriteLine();
+
+            if (!results.Any())
+            {
+                Console.WriteLine("No Digimon matched your search.");
+            }
+            else
+            {
+                foreach (var digimon in results)
+                {
+                    Console.WriteLine("------------------------------");
+                    Console.WriteLine($"Name      : {digimon.Name}");
+                    Console.WriteLine($"Stage     : {digimon.Stage}");
+                    Console.WriteLine($"Attribute : {digimon.Attribute}");
+                    Console.WriteLine($"Memory    : {digimon.Memory}");
+                }
+            }
+
+            break;
+
+
+
+        case "4":
+
+            Console.Write("Enter Attribute (Data, Vaccine, Virus, Free): ");
+
+            string? selectedAttribute = Console.ReadLine();
+
+            var attributeList = controller.GetByAttribute(selectedAttribute ?? "");
 
             foreach (var digimon in attributeList)
             {
@@ -79,7 +128,7 @@ while (running)
 
             break;
 
-        case "4":
+        case "5":
 
             var topMemory = controller.GetTopMemory(10);
 
@@ -90,12 +139,12 @@ while (running)
 
             break;
 
-        case "5":
-        
+        case "6":
+
             controller.ShowStatistics();
             break;
 
-        case "6":
+        case "7":
 
             running = false;
             break;

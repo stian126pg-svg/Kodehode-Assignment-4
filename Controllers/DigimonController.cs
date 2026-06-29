@@ -63,5 +63,33 @@ namespace Kodehode_Assignment_4.Controllers
                 .OrderByDescending(d => d.Memory)
                 .Take(amount);
         }
+
+        public IEnumerable<Digimon> AdvancedSearch(
+        string? stage,
+        string? attribute,
+        int? minimumMemory)
+        {
+        var query = _digimons.AsEnumerable();
+
+        if (!string.IsNullOrWhiteSpace(stage))
+            {
+            query = query.Where(d =>
+                d.Stage.Equals(stage, StringComparison.OrdinalIgnoreCase));
+            }
+
+        if (!string.IsNullOrWhiteSpace(attribute))
+            {
+            query = query.Where(d =>
+                d.Attribute.Equals(attribute, StringComparison.OrdinalIgnoreCase));
+            }
+
+        if (minimumMemory.HasValue)
+            {
+                query = query.Where(d =>
+                    d.Memory >= minimumMemory.Value);
+            }
+
+        return query;
+        }
     }
 }
