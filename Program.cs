@@ -20,7 +20,8 @@ while (running)
     Console.WriteLine("2. Search by Name");
     Console.WriteLine("3. Filter by Attribute");
     Console.WriteLine("4. Top 10 Memory");
-    Console.WriteLine("5. Exit");
+    Console.WriteLine("5. Show Statistics");
+    Console.WriteLine("6. Exit");
     
     Console.Write("\nChoose an option: ");
 
@@ -90,6 +91,11 @@ while (running)
             break;
 
         case "5":
+        
+            controller.ShowStatistics();
+            break;
+
+        case "6":
 
             running = false;
             break;

@@ -14,6 +14,22 @@ namespace Kodehode_Assignment_4.Controllers
             _digimons = digimons;
         }
 
+        public void ShowStatistics()
+        {
+            Console.WriteLine($"Total Digimon: {_digimons.Count}");
+
+            Console.WriteLine("\nBy Stage:");
+
+            var stages = _digimons
+                .GroupBy(d => d.Stage)
+                .OrderBy(g => g.Key);
+
+            foreach (var stage in stages)
+            {
+                Console.WriteLine($"{stage.Key}: {stage.Count()}");
+            }
+        }
+
         public IEnumerable<Digimon> GetRookies()
         {
             return _digimons.Where(d => d.Stage == "Rookie");
