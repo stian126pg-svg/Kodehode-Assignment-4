@@ -4,43 +4,65 @@
 using System.Linq;
 using Kodehode_Assignment_4.Models;
 
-namespace Kodehode_Assignment_4.Services
+namespace Kodehode_Assignment_4.Services;
+
+public class CsvReader
 {
-    public class CsvReader
+    public List<Digimon> ReadDigimon(string path)
     {
-        public List<Digimon> ReadDigimon(string path)
+        var digimons = new List<Digimon>();
+
+        if (!File.Exists(path))
+            throw new FileNotFoundException($"Could not find file: {path}");
+
+        var lines = File.ReadAllLines(path);
+
+        foreach (var line in lines.Skip(1))
         {
-            var digimons = new List<Digimon>();
+            var columns = line.Split(',');
 
-            if (!File.Exists(path))
-                throw new FileNotFoundException($"Could not find file: {path}");
+            if (columns.Length < 7)
+                continue;
 
-            var lines = File.ReadAllLines(path);
+            if (!int.TryParse(columns[0], out int number))
+                continue;
 
-            foreach (var line in lines.Skip(1))
+            if (!int.TryParse(columns[5], out int memory))
+                continue;
+
+            if (!int.TryParse(columns[6], out int equipSlots))
+                continue;
+
+            var digimon = new Digimon
             {
-                var columns = line.Split(',');
+                Number = number,
+                Name = columns[1],
+                Stage = ParseStage(columns[2]),
+                Type = columns[3],
+                Attribute = columns[4],
+                Memory = memory,
+                EquipSlots = equipSlots
+            };
 
-                if (columns.Length < 7)
-                {
-                    continue;
-                }
-
-                var digimon = new Digimon
-                {
-                    Number = int.Parse(columns[0]),
-                    Name = columns[1],
-                    Stage = columns[2],
-                    Type = columns[3],
-                    Attribute = columns[4],
-                    Memory = int.Parse(columns[5]),
-                    EquipSlots = int.Parse(columns[6])
-                };
-
-                digimons.Add(digimon);
-            }
-
-            return digimons;
+            digimons.Add(digimon);
         }
+
+        return digimons;
+    }
+
+    private Stage ParseStage(string value)
+    {
+        return value switch
+        {
+            "Baby" => Stage.Baby,
+            "In-Training" => Stage.InTraining,
+            "Rookie" => Stage.Rookie,
+            "Champion" => Stage.Champion,
+            "Ultimate" => Stage.Ultimate,
+            "Mega" => Stage.Mega,
+            "Ultra" => Stage.Ultra,
+            "Armor" => Stage.Armor,
+            _ => Stage.Unknown
+        };
     }
 }
