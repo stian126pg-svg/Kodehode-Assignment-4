@@ -21,6 +21,11 @@ namespace Kodehode_Assignment_4.Services
             {
                 var columns = line.Split(',');
 
+                if (columns.Length < 7)
+                {
+                    continue;
+                }
+
                 var digimon = new Digimon
                 {
                     Number = int.Parse(columns[0]),
