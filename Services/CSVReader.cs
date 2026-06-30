@@ -12,7 +12,8 @@ namespace Kodehode_Assignment_4.Services
         {
             var digimons = new List<Digimon>();
 
-            Console.WriteLine(Path.GetFullPath(path));
+            if (!File.Exists(path))
+                throw new FileNotFoundException($"Could not find file: {path}");
 
             var lines = File.ReadAllLines(path);
 
