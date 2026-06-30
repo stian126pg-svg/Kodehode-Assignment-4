@@ -1,16 +1,20 @@
 // Overall set-up tab.
 
-namespace Kodehode_Assignment_4.Models
-{
-    public class Digimon
-    {
-        public int Number { get; set; }
+namespace Kodehode_Assignment_4.Models;
 
-        public string Name { get; set; } = string.Empty;
-        public string Stage { get; set; } = string.Empty;
-        public string Type { get; set; } = string.Empty;
-        public string Attribute { get; set; } = string.Empty;
-        public int Memory { get; set; }
-        public int EquipSlots { get; set; }
-    }
+public class Digimon
+{
+    public int Number { get; init; }
+
+    public string Name { get; init; } = string.Empty;
+
+    public Stage Stage { get; init; }
+
+    public string Type { get; init; } = string.Empty;
+
+    public string Attribute { get; init; } = string.Empty;
+
+    public int Memory { get; init; }
+
+    public int EquipSlots { get; init; }
 }
