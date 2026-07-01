@@ -91,6 +91,13 @@ public class DigimonController
         return _digimons.Count;
     }
 
+    public IEnumerable<string> GetNames()
+    {
+        return _digimons
+            .Select(d => d.Name)
+            .OrderBy(name => name);
+    }
+
     // Advanced Search
     public IEnumerable<Digimon> AdvancedSearch(
         Stage? stage,
